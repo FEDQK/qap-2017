@@ -1,0 +1,83 @@
+@font-face {
+    font-family: OpenSans;
+    src: url(../fonts/OpenSans.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: OpenSansBold;
+    src: url(../fonts/OpenSansBold.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: OpenSansSemibold;
+    src: url(../fonts/OpenSansSemibold.ttf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 12px Arial, Tahoma;
+    background-color: #f0f3f6;
+}
+
+.container {
+  width: 1024px;
+  height: 768px;
+  margin: 0 auto;
+}
+
+.container h1 {
+  font-size: 24pt;
+  font-family: OpenSansBold;
+  text-transform: uppercase;
+  color: #8499a7;
+}
+
+.container h1 span {
+  color: #21b8c6;
+}
+
+.wrapper {
+  width: 1024px;
+  margin: 20px auto;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.cont {
+  height: 640px;
+}
+
+.image-block {
+
+  margin: 5px;
+}
+
+.image-block img {
+  box-shadow: 0 0 10px #c2cdd8;
+  -webkit-box-shadow: 0 0 10px #c2cdd8;
+}
+
+.image-info {
+  position: absolute;
+    left: 0;
+    bottom: 2px;
+    right: 0;
+    top: 70%;
+    background: white;
+    opacity: 0.9;
+    display: none;
+}
+
+.image-block:hover .image-info{
+    display:block;
+}

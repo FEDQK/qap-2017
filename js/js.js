@@ -1,0 +1,3 @@
+$('.cont').isotope({
+	layoutMode: 'masonryHorizontal',
+});
