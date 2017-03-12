@@ -51,33 +51,295 @@ body {
   margin: 20px auto;
   overflow: hidden;
   overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.wrapper::-webkit-scrollbar {
+  background-color: #d1dae3;
+  width: 10px;
+  border-radius: 8px;
+}
+.wrapper::-webkit-scrollbar-thumb {
+    background-color: #21b8c6;
+    border-radius: 8px;
 }
 
 .cont {
   height: 640px;
 }
 
-.image-block {
-
+.image-block, #add-new-image {
   margin: 5px;
+  box-shadow: 0 0 10px #c2cdd8;
+  -webkit-box-shadow: 0 0 10px #c2cdd8;
 }
 
 .image-block img {
-  box-shadow: 0 0 10px #c2cdd8;
-  -webkit-box-shadow: 0 0 10px #c2cdd8;
+  display: block;
+  max-width: 100%;
+  height: auto;
+
 }
 
 .image-info {
   position: absolute;
     left: 0;
-    bottom: 2px;
+    bottom: 0;
     right: 0;
-    top: 70%;
     background: white;
-    opacity: 0.9;
-    display: none;
+    opacity: 0.97;
+    padding-bottom: 10px;
+    display: block;//none
 }
 
 .image-block:hover .image-info{
     display:block;
+}
+
+#add-new-image {
+  background-color: white;
+  width: 236px;
+  height: 200px;
+
+}
+
+#add-new-image label {
+  cursor: pointer;
+}
+
+#add-new-image input {
+  display: none;
+}
+
+.center-image {
+  height: 100%;
+  text-align: center;
+  background: url('../images/icon-plus.png') center center no-repeat;
+
+}
+
+.center-image span {
+  font-family: ;
+  font-size: 15px;
+  color: #a0b0ba;
+  display: block;
+  padding-top: 130px;
+}
+
+.icon-comments {
+  margin-left: 15px;
+  float: left;
+}
+
+.icon-likes {
+  margin-right: 15px;
+  float: right;
+}
+
+.icon-info {
+  margin-top: 16px;
+}
+
+.count-info {
+  font-family: OpenSansSemibold;
+  font-size: 11px;
+  color: #0d7f8a;
+  position: relative;
+  min-width: 15px;
+  min-height: 15px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #a1b1bb;
+  display: block;
+  -webkit-user-select: none;
+  margin-top: 12px;
+  margin-right: 8px;
+  float: right;
+}
+
+.count-comments {
+  float: left;
+  margin-left: -9px;
+  margin-top: 10px;
+}
+
+.count-likes {
+  margin-right: -37px;
+  margin-top: 10px;
+  float: right;
+}
+.popup_overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 60;
+    display: none;
+    background-color: #f0f3f6;
+    opacity: 0.9;
+    top: 0px;
+    left: 0px;
+}
+.popup {
+    z-index: 101;
+    display: none;
+    background-color: #fff;
+    position: absolute;
+    width: 810px;
+    height: 595px;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px #c2cdd8;
+    -webkit-box-shadow: 0 0 10px #c2cdd8;
+}
+.popup > div {
+  float: left;
+}
+.detail-image {
+  width: 450px;
+  height: 100%;
+}
+.detail-image > img {
+  width: 100%;
+  height: 100%;
+}
+.detail-likes {
+  height: 60px;
+  width: 100%;
+  background: white;
+  opacity: 0.97;
+  position: relative;
+  bottom: 62px;
+}
+.block-likes {
+  position: relative;
+  text-align: center;
+  float: right;
+  width: 65px;
+  height: 60px;
+  margin-right: 6px;
+  bottom: 7px;
+}
+.like-icon {
+  background: url("../images/icon-like.png") center center no-repeat #e0e5e9;
+}
+.dislike-icon {
+  background: url("../images/icon-dislike.png") center center no-repeat #e0e5e9;
+}
+.block-likes > img {
+  margin-top: 18px;
+}
+.detail-comments {
+  width: 320px;
+  height: 100%;
+  margin-left: 25px;
+  color: #8499a7;
+}
+.detail-count-comments img {
+  float: right;
+  margin-top: 12px;
+}
+.detail-count-comments > span {
+  font-family: OpenSansSemibold;
+  font-size: 24px;
+  display: block;
+}
+.popup-close {
+  height: 33px;
+}
+.popup-close > img {
+  cursor: pointer;
+}
+.wrapper-comments {
+  height: 410px;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 18px;
+  padding-left: 7px;
+
+}
+.wrapper-comments::before {
+  position: absolute;
+  top: 476px;
+  left: 0;
+  left: 475px;
+  width: 305px;
+  border-bottom: 2px solid #d1dae3;
+  content: "";
+}
+
+.comment-info {
+  font-family: OpenSans;
+  font-size: 11px;
+}
+.comment-date {
+  float: right;
+  margin-right: 10px;
+}
+.commnet-text {
+  margin-top: 3px;
+  font-size: 14px;
+  color: #607583;
+  padding: 10px;
+  border: 2px solid #f0f3f6;
+  border-radius: 2px;
+}
+.user-comment {
+  margin-bottom: 10px;
+}
+.wrapper-comments::-webkit-scrollbar {
+  background-color: #d1dae3;
+  width: 5px;
+  border-radius: 8px;
+}
+.wrapper-comments::-webkit-scrollbar-thumb {
+    background-color: #21b8c6;
+    border-radius: 8px;
+}
+.form-add-comment {
+  width: 290px;
+  margin-left: 7px;
+  margin-top: 10px;
+}
+
+.user-nickname {
+  width: 93%;
+  border: none;
+  padding: 4px 11px;
+  border-bottom: 2px solid #f0f3f6;
+}
+.user-input {
+  outline: none;
+  font-size: 14px;
+  font-family: OpenSans;
+  color: #607583;
+}
+.user-nickname:focus {
+  border-bottom: 2px solid #21b8c6;
+}
+.user-text {
+  width: 228px;
+  height: 26px;
+  margin-top: 10px;
+  padding: 10px;
+  padding-right: 50px;
+  border: 2px solid #f0f3f6;
+  border-radius: 2px;
+}
+.button-send {
+  width: 50px;
+  height: 50px;
+  bottom: 53px;
+  left: 2px;
+  background: url("../images/icon-send.png") center center no-repeat #21b8c6;
+  position: relative;
+  float: right;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.user-text:focus {
+  border: 2px solid #21b8c6;
 }
