@@ -72,6 +72,7 @@ body {
   margin: 5px;
   box-shadow: 0 0 10px #c2cdd8;
   -webkit-box-shadow: 0 0 10px #c2cdd8;
+  cursor: pointer;
 }
 
 .image-block img {
@@ -89,7 +90,7 @@ body {
     background: white;
     opacity: 0.97;
     padding-bottom: 10px;
-    display: block;//none
+    display: none;
 }
 
 .image-block:hover .image-info{
@@ -215,6 +216,7 @@ body {
   bottom: 62px;
 }
 .block-likes {
+  cursor: pointer;
   position: relative;
   text-align: center;
   float: right;
@@ -228,6 +230,12 @@ body {
 }
 .dislike-icon {
   background: url("../images/icon-dislike.png") center center no-repeat #e0e5e9;
+}
+.active-like-icon {
+  background: url("../images/icon-like-white.png") center center no-repeat #28d0ce;
+}
+.active-dislike-icon {
+  background: url("../images/icon-dislike-white.png") center center no-repeat #d02828;
 }
 .block-likes > img {
   margin-top: 18px;
@@ -342,4 +350,16 @@ body {
 }
 .user-text:focus {
   border: 2px solid #21b8c6;
+}
+.type-standart > img {
+  width: 236px;
+  height: 200px;
+}
+.type-height > img {
+  width: 236px;
+  height: 410px;
+}
+.type-width > img {
+  width: 482px;
+  height: 200px;
 }

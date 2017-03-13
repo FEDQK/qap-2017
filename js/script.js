@@ -1,4 +1,6 @@
+var currentPopupId = null;
 window.onload = function() {
+var $grid = $('#grid');
 
     var Lists = function() {
         imageList = [{
@@ -7,47 +9,48 @@ window.onload = function() {
                 src: 'images/1.png',
                 like: 3,
                 dislike: 2,
+                type: 'type-width',
                 comments: [{
                     id: 1,
                     nickName: "Misha",
                     date: 'Today',
-                    text: "Hi, this test text Hi, this test text Hi, this test text Hi, this test text Hi, this test text Hi, this test text Hi, this test text"
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 },
                 {
                     id: 2,
                     nickName: "Misha2",
                     date: 'Today2',
-                    text: "Hi, this test text"
+                    text: "test text test text test text test text test text test text"
                 },
                 {
-                    id: 2,
-                    nickName: "Misha2",
-                    date: 'Today2',
-                    text: "Hi, this test text"
+                    id: 3,
+                    nickName: "Misha3",
+                    date: 'Today3',
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 },
                 {
-                    id: 2,
-                    nickName: "Misha2",
-                    date: 'Today2',
-                    text: "Hi, this test text"
+                    id: 4,
+                    nickName: "Misha4",
+                    date: 'Today4',
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 },
                 {
-                    id: 2,
-                    nickName: "Misha2",
-                    date: 'Today2',
-                    text: "Hi, this test text"
+                    id: 5,
+                    nickName: "Misha5",
+                    date: 'Today5',
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 },
                 {
-                    id: 2,
-                    nickName: "Misha2",
-                    date: 'Today2',
-                    text: "Hi, this test text"
+                    id: 6,
+                    nickName: "Misha6",
+                    date: 'Today6',
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 },
                 {
-                    id: 2,
-                    nickName: "Misha2",
-                    date: 'Today2',
-                    text: "Hi, this test text"
+                    id: 7,
+                    nickName: "Misha7",
+                    date: 'Today7',
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 }
               ]
             },
@@ -57,11 +60,12 @@ window.onload = function() {
                 src: 'images/2.png',
                 like: 8,
                 dislike: 5,
+                type: 'type-standart',
                 comments: [{
                     id: 1,
                     nickName: "Misha",
                     date: 'Today',
-                    text: "Hi, this test text"
+                    text: "Nullam viverra leo eget urna maximus, et pellentesque enim volutpat."
                 }]
             },
             {
@@ -70,6 +74,7 @@ window.onload = function() {
                 src: 'images/3.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-standart',
                 comments: []
             },
             {
@@ -86,6 +91,7 @@ window.onload = function() {
                 src: 'images/5.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-width',
                 comments: []
             },
             {
@@ -94,6 +100,7 @@ window.onload = function() {
                 src: 'images/6.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-height',
                 comments: []
             },
             {
@@ -102,6 +109,7 @@ window.onload = function() {
                 src: 'images/7.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-standart',
                 comments: []
             },
             {
@@ -110,6 +118,7 @@ window.onload = function() {
                 src: 'images/8.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-standart',
                 comments: []
             },
             {
@@ -118,6 +127,7 @@ window.onload = function() {
                 src: 'images/8.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-standart',
                 comments: []
             },
             {
@@ -126,6 +136,7 @@ window.onload = function() {
                 src: 'images/8.png',
                 like: 0,
                 dislike: 0,
+                type: 'type-standart',
                 comments: []
             }
         ];
@@ -161,26 +172,15 @@ window.onload = function() {
             divClass: 'block-likes dislike-icon'
           }
         ];
-        var currentPopupId = null;
+
         viewGrid();
-				viewAddNew();
-				addNewImage();
-
-        $('.image-block').click(function() {
-          $('.popup, .popup_overlay').show();
-          viewPopup($(this));
-        });
-
-				//refresh();
-
     }
 
     function viewGrid() {
-      var gridImages = document.getElementById('grid');
-      gridImages.innerHTML = "";
+      $grid.html("");
       for (var index in imageList) {
           var div = document.createElement('div');
-          div.className = "image-block";
+          div.className = "image-block " +imageList[index].type;
           $(div).attr("data-id", imageList[index].id);
 
           var image = document.createElement('img');
@@ -210,21 +210,26 @@ window.onload = function() {
               infoSpan.className = infoIcons[infoProp].spanClass;
 
               imageInfo.appendChild(infoSpan);
-
-
           }
           div.appendChild(imageInfo);
-          gridImages.appendChild(div);
+          $grid.append(div);
       }
+      viewAddNew();
       refresh();
+      $('.image-block').click(function() {
+        $('.popup, .popup_overlay').show();
+        currentPopupId = $(this).attr("data-id");
+        viewPopup();
+      });
+      $grid.isotope('reloadItems');
+      addNewImage();
     }
 
 		function viewAddNew() {
-			var gridImages = document.getElementById('grid');
 			var addNew = document.createElement('div');
 			addNew.id = "add-new-image";
 			addNew.innerHTML = "<label><div class='center-image'><span>Add your<br />Picture</span></div><input type='file' id='fileInput' /></label>";
-			gridImages.appendChild(addNew);
+			$grid.append(addNew);
 		}
 
 		function refresh() {
@@ -232,11 +237,10 @@ window.onload = function() {
         $('#grid').isotope({
             layoutMode: 'masonryHorizontal',
         });
-      }, 10);
+      }, 0);
 		}
 
-    function viewPopup(image) {
-      currentPopupId = image.attr("data-id");
+    function viewPopup() {
       $('.popup').html("");
       currentObject = findElement();
       viewPopupImageLikes();
@@ -255,8 +259,8 @@ window.onload = function() {
       if (yy < 10) yy = '0' + yy;
 
       var hh = date.getHours();
-      var mm = date.getMinutes();
-      return dd + '.' + mm + '.' + yy + ' ' + hh + ':' + mm;
+      var mi = date.getMinutes();
+      return dd + '.' + mm + '.' + yy + ' ' + hh + ':' + mi;
     }
 
     function findElement() {
@@ -268,7 +272,7 @@ window.onload = function() {
     }
 
     function viewPopupComments() {
-      $(".detail-comments").detach()
+      $(".detail-comments").detach();
       var detailComments = document.createElement('div');
       detailComments.className = "detail-comments";
 
@@ -287,18 +291,6 @@ window.onload = function() {
         var userComment = document.createElement('div');
         userComment.className = "user-comment";
         userComment.innerHTML = '<div class="comment-info"><span>'+currentObject.comments[currentComment].nickName+'</span><span class="comment-date">'+currentObject.comments[currentComment].date+'</span></div><div class="commnet-text"><span>'+currentObject.comments[currentComment].text+'</span></div>';
-        /*var commentInfo = document.createElement('div');
-        commentInfo.className = "comment-info";
-
-        var commentNickname = document.createElement('span');
-        commentNickname.innerHTML = currentObject.comments[currentComment].nickName;
-
-        var commentDate = document.createElement('span');
-        commentDate.className = "comment-date";
-        commentDate.innerHTML = currentObject.comments[currentComment].date;
-
-        commentInfo.appendChild(commentNickname);
-        userComment.appendChild(commentInfo);*/
         wrapperComments.appendChild(userComment);
       }
       detailComments.appendChild(wrapperComments);
@@ -332,6 +324,7 @@ window.onload = function() {
     }
 
     function viewPopupImageLikes() {
+      $(".detail-image").detach();
       var detailImage = document.createElement('div');
       detailImage.className = "detail-image";
       var img = document.createElement('img');
@@ -345,6 +338,7 @@ window.onload = function() {
       for (var infoProp in detailInfoIcons) {
         var likeIcon = document.createElement('div');
         likeIcon.className = detailInfoIcons[infoProp].divClass;
+        $(likeIcon).attr('data-type', detailInfoIcons[infoProp]['type']);
 
         var countInfo = document.createElement('span');
         countInfo.className = "count-info";
@@ -356,39 +350,72 @@ window.onload = function() {
       }
       detailImage.appendChild(detailLikes);
       $('.popup').append(detailImage);
+
+      $(".block-likes").on('click', function() {
+        var type = $(this).attr('data-type');
+        var self = $(this);
+        if(type == 'like') {
+          $(this).addClass("active-like-icon");
+          currentObject.like++;
+        }
+        else {
+          $(this).addClass("active-dislike-icon");
+          currentObject.dislike++;
+        }
+        $(this).css('bottom', "0");
+        setTimeout(function() {
+          viewPopup();
+          $(self).css('bottom', "7px");
+          $(self).removeClass("active-like-icon active-dislike-icon");
+        }, 200);
+      });
     }
 
 
 
 		function addNewImage() {
 			var fileInput = document.getElementById('fileInput');
-	    var gridImages = document.getElementById('grid');
 	    fileInput.addEventListener('change', function(e) {
-	        var file = fileInput.files[0];
-	        var imageType = /image.*/;
+	      var file = fileInput.files[0];
+	      var imageType = /image.*/;
 
 	        if (file.type.match(imageType)) {
 	            var reader = new FileReader();
 
 	            reader.onload = function(e) {
-	                //gridImages.innerHTML = "";
+                  var imgType = "type-standart", imgWidth;
+                  const standartH = 305,
+                  standartW = 359;
 
-	                var img = new Image();
-	                img.src = reader.result;
+                  var img = new Image();
+                  img.src = reader.result;
+                  imgWidth = img.width;
+                  imgHeight = img.height;
+                  if(imgWidth > standartW) {
+                    imgType = "type-width";
+                  }
+                  if(imgHeight > standartH) {
+                    imgType = "type-height";
+                  }
 
-	                var div = document.createElement('div');
-	                div.className = "image-block";
-	                div.appendChild(img);
+                  var newImage = {
+                    id: Date.now(),
+                    alt: "img"+Date.now(),
+                    src: reader.result,
+                    like: 0,
+                    dislike: 0,
+                    type: imgType,
+                    comments: []
+                  };
 
-	                gridImages.appendChild(div);
+                  imageList.push(newImage);
+                  viewGrid();
 	            }
-
 	            reader.readAsDataURL(file);
 	        } else {
-	            gridImages.innerHTML = "File not supported!"
+	            $grid.html("File not supported!");
 	        }
 	    });
-			refresh();
 		}
 
 
